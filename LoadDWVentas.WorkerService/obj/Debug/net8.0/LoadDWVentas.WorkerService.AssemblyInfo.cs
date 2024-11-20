@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LoadDWVentas.WorkerService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f68bf6cc354bde5bac6bdd7cfa80f3f299e40450")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f73fcef614efe0064d63821af20cd264bf92212")]
 [assembly: System.Reflection.AssemblyProductAttribute("LoadDWVentas.WorkerService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LoadDWVentas.WorkerService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
