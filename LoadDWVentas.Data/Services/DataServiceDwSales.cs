@@ -3,6 +3,7 @@ using LoadDWVentas.Data.Context;
 using LoadDWVentas.Data.Entities.DWSales;
 using LoadDWVentas.Data.Interfaces;
 using LoadDWVentas.Data.Result;
+using Microsoft.EntityFrameworkCore;
 
 namespace LoadDWVentas.Data.Sercices
 {
@@ -24,7 +25,7 @@ namespace LoadDWVentas.Data.Sercices
             try
             {
                 //Obtenemos todos los empleados
-                var customers = _northwindContext.Customers.Select(cus => new DimCustomer() {
+                var customers = _northwindContext.Customers.AsNoTracking().Select(cus => new DimCustomer() {
                     CustomerID = cus.CustomerID,
                     CompanyName = cus.CompanyName,
                 }).ToList();
@@ -49,7 +50,7 @@ namespace LoadDWVentas.Data.Sercices
             try
             {
                 //Obtenemos todos los empleados
-                var employees = _northwindContext.Employees.Select(emp => new DimEmployee() {
+                var employees = _northwindContext.Employees.AsNoTracking().Select(emp => new DimEmployee() {
                     EmployeeID = emp.EmployeeID,
                     FullName = string.Concat(emp.FirstName, " ", emp.LastName)
                 }).ToList();
@@ -81,7 +82,7 @@ namespace LoadDWVentas.Data.Sercices
                     ProductName = product.ProductName,
                     CategoryId = category.CategoryID,
                     CategoryName = category.CategoryName
-                }).ToList();
+                }).AsNoTracking().ToList();
 
                 //Insertamos en la dimensión
                 await _dwSalesContext.DimProducts.AddRangeAsync(products);
@@ -103,7 +104,7 @@ namespace LoadDWVentas.Data.Sercices
             try
             {
                 //Obtenemos todos los empleados
-                var shippers = _northwindContext.Shippers.Select(emp => new DimShipper() {
+                var shippers = _northwindContext.Shippers.AsNoTracking().Select(emp => new DimShipper() {
                     ShipperID = emp.ShipperID,
                     CompanyName = emp.CompanyName
                 }).ToList();
