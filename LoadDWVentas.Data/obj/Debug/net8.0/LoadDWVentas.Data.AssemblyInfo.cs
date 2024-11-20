@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LoadDWVentas.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6402cd4c45ac61bc44eb8316c01646087acf10b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c723535ed1660e4b4be3872373d09437bd7cb0ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("LoadDWVentas.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LoadDWVentas.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
