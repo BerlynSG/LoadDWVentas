@@ -1,0 +1,13 @@
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/bin/Debug/net8.0/LoadDWVentas.Data.deps.json
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/bin/Debug/net8.0/LoadDWVentas.Data.dll
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/bin/Debug/net8.0/LoadDWVentas.Data.pdb
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.csproj.AssemblyReference.cache
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.GeneratedMSBuildEditorConfig.editorconfig
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.AssemblyInfoInputs.cache
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.AssemblyInfo.cs
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.csproj.CoreCompileInputs.cache
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.sourcelink.json
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.dll
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/refint/LoadDWVentas.Data.dll
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/LoadDWVentas.Data.pdb
+/mnt/sda1/Software Development/LoadDWVentas/LoadDWVentas.Data/obj/Debug/net8.0/ref/LoadDWVentas.Data.dll

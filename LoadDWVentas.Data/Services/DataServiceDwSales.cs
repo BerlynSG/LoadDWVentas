@@ -16,8 +16,8 @@ namespace LoadDWVentas.Data.Sercices
             _northwindContext = northwindContext;
             _dwSalesContext = dwSalesContext;
         }
-
-        public async Task<OperationResult> LoadDimCustomer()
+        
+        private async Task<OperationResult> LoadDimCustomer()
         {
             OperationResult result = new OperationResult();
             
@@ -42,7 +42,7 @@ namespace LoadDWVentas.Data.Sercices
             return result;
         }
 
-        public async Task<OperationResult> LoadDimEmployee()
+        private async Task<OperationResult> LoadDimEmployee()
         {
             OperationResult result = new OperationResult();
             
@@ -50,7 +50,7 @@ namespace LoadDWVentas.Data.Sercices
             {
                 //Obtenemos todos los empleados
                 var employees = _northwindContext.Employees.Select(emp => new DimEmployee() {
-                    EmployeeKey = emp.EmployeeID,
+                    EmployeeID = emp.EmployeeID,
                     FullName = string.Concat(emp.FirstName, " ", emp.LastName)
                 }).ToList();
 
@@ -66,8 +66,8 @@ namespace LoadDWVentas.Data.Sercices
 
             return result;
         }
-
-        public async Task<OperationResult> LoadDimProduct()
+        
+        private async Task<OperationResult> LoadDimProduct()
         {
             OperationResult result = new OperationResult();
 
@@ -96,7 +96,7 @@ namespace LoadDWVentas.Data.Sercices
             return result;
         }
 
-        public async Task<OperationResult> LoadDimShipper()
+        private async Task<OperationResult> LoadDimShipper()
         {
             OperationResult result = new OperationResult();
             
@@ -104,8 +104,8 @@ namespace LoadDWVentas.Data.Sercices
             {
                 //Obtenemos todos los empleados
                 var shippers = _northwindContext.Shippers.Select(emp => new DimShipper() {
-                    ShipperKey = emp.ShipperID,
-                    ShipperName = emp.CompanyName
+                    ShipperID = emp.ShipperID,
+                    CompanyName = emp.CompanyName
                 }).ToList();
 
                 //Insertamos en la dimensión
@@ -119,6 +119,24 @@ namespace LoadDWVentas.Data.Sercices
             }
 
             return result;
+        }
+        
+        public async Task<OperationResult> LoadDWH()
+        {
+            OperationResult result = new OperationResult();
+            try
+            {
+                await LoadDimCustomer();
+                await LoadDimEmployee();
+                await LoadDimProduct();
+                await LoadDimShipper();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"Error al cargar el DWH. {ex.Message}";
+            }
+            return new OperationResult() { Success = true, Message = "Ok" };
         }
     }
 }
