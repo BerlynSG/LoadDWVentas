@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LoadDWVentas.Data.Context
 {
-    public partial class NorthwindContext : DbContext
+    public class NorthwindContext : DbContext
     {
         public NorthwindContext(DbContextOptions<NorthwindContext> options) : base(options)
         {
