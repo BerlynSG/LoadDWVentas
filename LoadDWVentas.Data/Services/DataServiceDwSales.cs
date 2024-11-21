@@ -121,6 +121,47 @@ namespace LoadDWVentas.Data.Sercices
 
             return result;
         }
+
+        private async Task<OperationResult> LoadFactOrder()
+        {
+            OperationResult result = new OperationResult();
+            
+            try
+            {
+                //Obtenemos todos los empleados
+                var sales = await _northwindContext.VWSales.AsNoTracking().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+            }
+
+            return result;
+        }
+
+        private async Task<OperationResult> LoadFactCustomersServed()
+        {
+            OperationResult result = new OperationResult();
+            
+            try
+            {
+                //Obtenemos todos los empleados
+                var customersserved = await _northwindContext.VWCustomersServed.AsNoTracking().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+            }
+
+            return result;
+        }
+
+        public async Task DeleteAllDataAsync()
+        {
+            await _dwSalesContext.Database.ExecuteSqlRawAsync("EXEC sp_DeleteAllData");
+        }
         
         public async Task<OperationResult> LoadDWH()
         {
@@ -131,6 +172,8 @@ namespace LoadDWVentas.Data.Sercices
                 await LoadDimEmployee();
                 await LoadDimProduct();
                 await LoadDimShipper();
+                await LoadFactOrder();
+                await LoadFactCustomersServed();
             }
             catch (Exception ex)
             {

@@ -19,8 +19,15 @@ namespace LoadDWVentas.Data.Context
             public DbSet<DimProduct> DimProducts { get; set; }
             public DbSet<DimShipper> DimShippers { get; set; }
 
-            //public DbSet<FactOrder> FactOrders { get; set; }
+            public DbSet<FactOrder> FactOrders { get; set; }
             //public DbSet<FactClienteAtendido> FactClientesAtendidos { get; set; }
         #endregion
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FactOrder>()
+                .Property(p => p.Sells)
+                .HasPrecision(18, 2); // 18 dígitos en total, 2 después del punto decimal
+        }
     }
 }
