@@ -158,9 +158,20 @@ namespace LoadDWVentas.Data.Sercices
             return result;
         }
 
-        public async Task DeleteAllDataAsync()
+        public async Task<OperationResult> DeleteAllDataAsync()
         {
-            await _dwSalesContext.Database.ExecuteSqlRawAsync("EXEC sp_DeleteAllData");
+            OperationResult result = new OperationResult();
+            try
+            {
+                await _dwSalesContext.Database.ExecuteSqlRawAsync("EXEC sp_DeleteAllData");
+                await _dwSalesContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"Error al cargar la dimensión Shipper {ex.Message}";
+            }
+            return result;
         }
         
         public async Task<OperationResult> LoadDWH()
@@ -168,6 +179,7 @@ namespace LoadDWVentas.Data.Sercices
             OperationResult result = new OperationResult();
             try
             {
+                await DeleteAllDataAsync();
                 await LoadDimCustomer();
                 await LoadDimEmployee();
                 await LoadDimProduct();
