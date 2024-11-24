@@ -130,6 +130,55 @@ namespace LoadDWVentas.Data.Sercices
             {
                 //Obtenemos todos los empleados
                 var sales = await _northwindContext.VWSales.AsNoTracking().ToListAsync();
+                //Implementando optimizaciones propias
+                var registedDates = new List<int>();
+                // Forma más opimizada(Está comentada porque es una manera diferente de hacerlo, funciona con lo comentado más adelante)
+                /*
+                var customers = await _dwSalesContext.DimCustomers.ToListAsync();
+                var employees = await _dwSalesContext.DimEmployees.ToListAsync();
+                var products = await _dwSalesContext.DimProducts.ToListAsync();
+                var shippers = await _dwSalesContext.DimShippers.ToListAsync();*/
+
+                foreach (var sale in sales)
+                {
+                    // Forma más opimizada(Está comentada porque es una manera diferente a la del profesor)
+                    /*
+                    var customer = customers.FirstOrDefault(c => c.CustomerID == sale.CustomerId);
+                    var employee = employees.FirstOrDefault(e => e.EmployeeID == sale.EmployeeId);
+                    var product = products.FirstOrDefault(p => p.ProductId == sale.ProductId);
+                    var shipper = shippers.FirstOrDefault(s => s.ShipperID == sale.ShipperId);
+                    */
+                    var customer = await _dwSalesContext.DimCustomers.SingleOrDefaultAsync(c => c.CustomerID == sale.CustomerId);
+                    var employee = await _dwSalesContext.DimEmployees.SingleOrDefaultAsync(e => e.EmployeeID == sale.EmployeeId);
+                    var product = await _dwSalesContext.DimProducts.SingleOrDefaultAsync(p => p.ProductId == sale.ProductId);
+                    var shipper = await _dwSalesContext.DimShippers.SingleOrDefaultAsync(s => s.ShipperID == sale.ShipperId);
+
+                    if (sale.DateKey != null && !registedDates.Contains((int)sale.DateKey))
+                    {
+                        DimDate date = new DimDate(){
+                            DateKey = (int)sale.DateKey,
+                            Year = sale.Year,
+                            Month = sale.Month
+                        };
+                        await _dwSalesContext.DimDates.AddAsync(date);
+                        registedDates.Add((int)sale.DateKey);
+                    }
+
+                    var FactSales = new FactOrder(){
+                        CustomerKey = customer.CustomerKey,
+                        EmployeeKey = employee.EmployeeKey,
+                        ProductKey = product.ProductKey,
+                        ShipperKey = shipper.ShipperKey,
+                        DateKey = sale.DateKey,
+                        Country = sale.Country,
+                        Sells = sale.Sells,
+                        SellsQuantity = sale.SellsQuantity,
+                    };
+
+                    await _dwSalesContext.FactOrders.AddAsync(FactSales);
+                    
+                    await _dwSalesContext.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -148,6 +197,20 @@ namespace LoadDWVentas.Data.Sercices
             {
                 //Obtenemos todos los empleados
                 var customersserved = await _northwindContext.VWCustomersServed.AsNoTracking().ToListAsync();
+
+                foreach (var customerserved in customersserved)
+                {
+                    var employee = await _dwSalesContext.DimEmployees.SingleOrDefaultAsync(e => e.EmployeeID == customerserved.EmployeeID);
+                    FactCustomersServed factCustomersServed = new FactCustomersServed(){
+                        EmployeeKey = employee.EmployeeKey,
+                        CustomerQuantity = customerserved.CustomerQuantity
+                    };
+
+                    await _dwSalesContext.FactCustomersServed.AddAsync(factCustomersServed);
+                    await _dwSalesContext.SaveChangesAsync();
+                }
+
+                result.Success = true;
             }
             catch (Exception ex)
             {

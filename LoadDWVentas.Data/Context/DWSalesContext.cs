@@ -20,6 +20,7 @@ namespace LoadDWVentas.Data.Context
             public DbSet<DimShipper> DimShippers { get; set; }
 
             public DbSet<FactOrder> FactOrders { get; set; }
+            public DbSet<FactCustomersServed> FactCustomersServed { get; set; }
             //public DbSet<FactClienteAtendido> FactClientesAtendidos { get; set; }
         #endregion
 
